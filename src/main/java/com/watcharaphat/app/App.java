@@ -32,6 +32,7 @@ public class App
         MongoClient mongoClient = new MongoClient(
                 new ServerAddress(mongoKey.getHost(), mongoKey.getPort()),
                 Arrays.asList(credential));
+
         MongoDatabase database = mongoClient.getDatabase(mongoKey.getDatabase());
 
         for (String name : database.listCollectionNames()) {
