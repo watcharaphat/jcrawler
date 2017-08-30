@@ -23,10 +23,16 @@ public class App
     {
         MongoKey mongoKey = new MongoKey();
 
-        MongoCredential credential = MongoCredential.createCredential(mongoKey.user, mongoKey.database, mongoKey.password);
-        MongoClient mongoClient = new MongoClient(new ServerAddress(mongoKey.host, mongoKey.port),
+        MongoCredential credential = MongoCredential.createCredential(
+                mongoKey.getUser(),
+                mongoKey.getDatabase(),
+                mongoKey.getPassword()
+        );
+
+        MongoClient mongoClient = new MongoClient(
+                new ServerAddress(mongoKey.getHost(), mongoKey.getPort()),
                 Arrays.asList(credential));
-        MongoDatabase database = mongoClient.getDatabase(mongoKey.database);
+        MongoDatabase database = mongoClient.getDatabase(mongoKey.getDatabase());
 
         for (String name : database.listCollectionNames()) {
             System.out.println(name);
