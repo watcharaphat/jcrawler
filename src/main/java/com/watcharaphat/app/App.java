@@ -19,8 +19,7 @@ import java.util.Set;
 
 public class App
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws Exception {
         MongoKey mongoKey = new MongoKey();
 
         MongoCredential credential = MongoCredential.createCredential(
@@ -38,5 +37,9 @@ public class App
         for (String name : database.listCollectionNames()) {
             System.out.println(name);
         }
+
+        System.out.println("******************************");
+
+        Controller.main(args);
     }
 }
