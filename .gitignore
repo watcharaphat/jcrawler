@@ -2,3 +2,4 @@
 MongoKey.java
 .idea
 *.secret
+data/
