@@ -9,7 +9,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 public class Controller {
     public static void main(String[] args) throws Exception {
         String crawlStorageFolder = "data/crawl/root";
-        int numberOfCrawlers = 7;
+        int numberOfCrawlers = 2;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
@@ -27,9 +27,10 @@ public class Controller {
          * URLs that are fetched and then the crawler starts following links
          * which are found in these pages
          */
-        controller.addSeed("http://www.ics.uci.edu/~lopes/");
-        controller.addSeed("http://www.ics.uci.edu/~welling/");
-        controller.addSeed("http://www.ics.uci.edu/");
+        controller.addSeed("https://www.ku.ac.th/web2012/index.php?c=adms&m=mainpage1");
+//        controller.addSeed("https://www.cpe.ku.ac.th/");
+//        controller.addSeed("http://www.ics.uci.edu/~welling/");
+//        controller.addSeed("http://www.ics.uci.edu/");
 
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
