@@ -9,7 +9,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 class Controller {
     static void start() throws Exception {
         String crawlStorageFolder = "data/crawl/root";
-        int numberOfCrawlers = 2;
+        int numberOfCrawlers = 7;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
