@@ -38,6 +38,11 @@ public class MyCrawler extends WebCrawler {
         String url = page.getWebURL().getURL();
         System.out.println("URL: " + url);
 
+        System.out.println("--------------------------------------------------");
+//        App.SitesContainRobotTxt.add(url);
+//        System.out.println(App.SitesContainRobotTxt);
+        System.out.println("--------------------------------------------------");
+
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String text = htmlParseData.getText();

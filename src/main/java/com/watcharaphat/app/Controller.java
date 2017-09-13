@@ -7,12 +7,13 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Controller {
-    public static void main(String[] args) throws Exception {
+    public static void start() throws Exception {
         String crawlStorageFolder = "data/crawl/root";
         int numberOfCrawlers = 2;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
+        config.setIncludeHttpsPages(true);
 
         /*
          * Instantiate the controller for this crawl.
