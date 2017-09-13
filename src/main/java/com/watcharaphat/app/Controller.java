@@ -29,7 +29,7 @@ class Controller {
          * which are found in these pages
          */
         controller.addSeed("https://www.ku.ac.th/web2012/index.php?c=adms&m=mainpage1");
-//        controller.addSeed("https://www.cpe.ku.ac.th/");
+        controller.addSeed("https://www.cpe.ku.ac.th/");
 //        controller.addSeed("http://www.ics.uci.edu/~welling/");
 //        controller.addSeed("http://www.ics.uci.edu/");
 

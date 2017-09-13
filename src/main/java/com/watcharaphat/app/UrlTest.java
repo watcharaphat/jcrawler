@@ -1,13 +1,13 @@
 package com.watcharaphat.app;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class UrlTest {
     public static void main(String[] args) throws IOException {
@@ -17,9 +17,6 @@ public class UrlTest {
 
         Path dataDir = Paths.get("data/crawlData/test");
 
-        if (Files.exists(dataDir)) System.out.println("Exist!");
-        else System.out.println("not Exist!");
-
         String targetDir = dataDir.toString() + "/" + url.getHost();
 
         for (int i = 0; i < paths.length; i++) {
@@ -27,12 +24,19 @@ public class UrlTest {
             targetDir += "/" + paths[i];
         }
 
-        System.out.println(targetDir);
+        String html = "<html>Hello</html>";
+
         Path targetPath = Paths.get(targetDir);
         Files.createDirectories(targetPath.getParent());
 
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
         FileOutputStream fos = new FileOutputStream(targetPath.toString());
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+
+        String t = "data/test/test.html";
+        Path testPath = Paths.get(t);
+        Files.createDirectories(testPath.getParent());
+        System.out.println("testPath: " + testPath);
+        Files.write(Paths.get(testPath.toString()), html.getBytes());
     }
 }

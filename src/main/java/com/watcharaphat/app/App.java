@@ -23,25 +23,25 @@ public class App
     private static MongoDatabase db;
 
     public static void main(String[] args ) throws Exception {
-        MongoKey mongoKey = new MongoKey();
-
-        credential = MongoCredential.createCredential(
-                mongoKey.getUser(),
-                mongoKey.getDatabase(),
-                mongoKey.getPassword()
-        );
-
-        mongoClient = new MongoClient(
-                new ServerAddress(mongoKey.getHost(), mongoKey.getPort()),
-                Arrays.asList(credential));
-
-        db = mongoClient.getDatabase(mongoKey.getDatabase());
-
-        for (String name : db.listCollectionNames()) {
-            System.out.println(name);
-        }
-
-        System.out.println("******************************");
+//        MongoKey mongoKey = new MongoKey();
+//
+//        credential = MongoCredential.createCredential(
+//                mongoKey.getUser(),
+//                mongoKey.getDatabase(),
+//                mongoKey.getPassword()
+//        );
+//
+//        mongoClient = new MongoClient(
+//                new ServerAddress(mongoKey.getHost(), mongoKey.getPort()),
+//                Arrays.asList(credential));
+//
+//        db = mongoClient.getDatabase(mongoKey.getDatabase());
+//
+//        for (String name : db.listCollectionNames()) {
+//            System.out.println(name);
+//        }
+//
+//        System.out.println("******************************");
 
         Controller.start();
     }
