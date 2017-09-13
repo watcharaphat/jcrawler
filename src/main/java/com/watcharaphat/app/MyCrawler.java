@@ -92,7 +92,6 @@ public class MyCrawler extends WebCrawler {
             System.out.println("Text length: " + text.length());
             System.out.println("Html length: " + html.length());
             System.out.println("Number of outgoing links: " + links.size());
-            System.out.println("robotsURL " + robotsTxtUrl);
 
             /** Save File to disk **/
 
