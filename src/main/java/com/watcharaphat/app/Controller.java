@@ -6,8 +6,8 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
-public class Controller {
-    public static void start() throws Exception {
+class Controller {
+    static void start() throws Exception {
         String crawlStorageFolder = "data/crawl/root";
         int numberOfCrawlers = 2;
 

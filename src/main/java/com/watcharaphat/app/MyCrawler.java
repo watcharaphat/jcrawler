@@ -5,6 +5,8 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -35,13 +37,22 @@ public class MyCrawler extends WebCrawler {
      */
     @Override
     public void visit(Page page) {
-        String url = page.getWebURL().getURL();
+        URL url = null;
+        try {
+            url = new URL(page.getWebURL().getURL());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        WebURL robotsTxtUrl = new WebURL();
+        robotsTxtUrl.setURL(url.getHost());
+
         System.out.println("URL: " + url);
 
-        System.out.println("--------------------------------------------------");
+//        System.out.println("--------------------------------------------------");
 //        App.SitesContainRobotTxt.add(url);
 //        System.out.println(App.SitesContainRobotTxt);
-        System.out.println("--------------------------------------------------");
+//        System.out.println("--------------------------------------------------");
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
@@ -52,6 +63,7 @@ public class MyCrawler extends WebCrawler {
             System.out.println("Text length: " + text.length());
             System.out.println("Html length: " + html.length());
             System.out.println("Number of outgoing links: " + links.size());
+            System.out.println("robotsURL " + robotsTxtUrl);
         }
     }
 }
