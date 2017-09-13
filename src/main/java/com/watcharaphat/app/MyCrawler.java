@@ -5,10 +5,18 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import static org.apache.commons.codec.CharEncoding.UTF_8;
 
 public class MyCrawler extends WebCrawler {
 
@@ -44,27 +52,74 @@ public class MyCrawler extends WebCrawler {
             e.printStackTrace();
         }
 
-        WebURL robotsTxtUrl = new WebURL();
-        robotsTxtUrl.setURL(url.getHost());
+        URL robotsTxtUrl = null;
+        try {
+            robotsTxtUrl = new URL(
+                    url.getProtocol() + "://" + url.getHost() + "/robots.txt"
+            );
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        };
+
+        /** Check robots.txt **/
+
+        HttpURLConnection huc = null;
+        Path SitesContainRobotsTxt = Paths.get("data/sites_contain_robots.txt");
+        try {
+            huc = (HttpURLConnection) robotsTxtUrl.openConnection();
+            huc.setRequestMethod("HEAD");
+            if (!App.HostCheckedRobotsTxt.contains(url.getHost())) {
+                if (huc.getResponseCode() == 200) {
+                    Files.write(
+                            Paths.get(SitesContainRobotsTxt.toString()),
+                            (url.getHost() + System.lineSeparator()).getBytes(UTF_8),
+                            StandardOpenOption.CREATE,StandardOpenOption.APPEND
+                    );
+                }
+                App.HostCheckedRobotsTxt.add(url.getHost());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        App.HostCheckedRobotsTxt.add(url.getHost());
 
         System.out.println("URL: " + url);
-
-//        System.out.println("--------------------------------------------------");
-//        App.SitesContainRobotTxt.add(url);
-//        System.out.println(App.SitesContainRobotTxt);
-//        System.out.println("--------------------------------------------------");
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String text = htmlParseData.getText();
             String html = htmlParseData.getHtml();
-            System.out.println(html);
             Set<WebURL> links = htmlParseData.getOutgoingUrls();
 
             System.out.println("Text length: " + text.length());
             System.out.println("Html length: " + html.length());
             System.out.println("Number of outgoing links: " + links.size());
             System.out.println("robotsURL " + robotsTxtUrl);
+            System.out.println("HashSet" + App.HostCheckedRobotsTxt);
+
+            /** Save File to disk **/
+
+            Path dataDir = Paths.get("data/crawlData/");
+
+            String targetFile = dataDir.toString() + "/" + url.getHost();
+            String[] paths = url.getPath().split("/");
+            if (paths.length == 0) {
+                targetFile += "/index.html";
+            }
+            for (String path : paths) {
+                if (!path.isEmpty()) {
+                    targetFile += "/" + path;
+                }
+            }
+
+            Path targetDir = Paths.get(targetFile);
+            try {
+                Files.createDirectories(targetDir.getParent());
+                Files.write(Paths.get(targetDir.toString()), html.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("******************************************");
         }
     }
 }

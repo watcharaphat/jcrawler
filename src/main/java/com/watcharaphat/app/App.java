@@ -17,7 +17,8 @@ import com.mongodb.client.result.UpdateResult;
 
 public class App
 {
-    private static HashSet<String> SitesContainRobotTxt = new HashSet<String>();
+    private static HashSet<String> HostContainRobotsTxt = new HashSet<String>();
+    public static HashSet<String> HostCheckedRobotsTxt = new HashSet<String>();
     private static MongoCredential credential;
     private static MongoClient mongoClient;
     private static MongoDatabase db;
