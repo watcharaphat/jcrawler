@@ -5,3 +5,4 @@ MongoKey.java
 data/
 UrlTest.java
 *.html
+target/
