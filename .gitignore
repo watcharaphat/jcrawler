@@ -4,3 +4,4 @@ MongoKey.java
 *.secret
 data/
 UrlTest.java
+*.html

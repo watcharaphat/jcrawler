@@ -99,13 +99,14 @@ public class MyCrawler extends WebCrawler {
 
             String targetFile = dataDir.toString() + "/" + url.getHost();
             String[] paths = url.getPath().split("/");
-            if (paths.length == 0) {
-                targetFile += "/index.html";
-            }
             for (String path : paths) {
                 if (!path.isEmpty()) {
                     targetFile += "/" + path;
                 }
+            }
+
+            if (paths.length == 0 || paths[paths.length-1].indexOf('.') == -1) {
+                targetFile += "/index.html";
             }
 
             Path targetDir = Paths.get(targetFile);
