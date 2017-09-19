@@ -6,3 +6,4 @@ data/
 UrlTest.java
 *.html
 target/
+classes/
