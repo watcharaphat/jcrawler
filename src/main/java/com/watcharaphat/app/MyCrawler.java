@@ -105,7 +105,7 @@ public class MyCrawler extends WebCrawler {
                 }
             }
 
-            if (paths.length == 0 || paths[paths.length-1].indexOf('.') == -1) {
+            if (paths.length == 0 || !paths[paths.length-1].contains(".html")) {
                 targetFile += "/index.html";
             }
 
